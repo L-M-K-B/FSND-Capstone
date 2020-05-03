@@ -1,11 +1,14 @@
 INSERT INTO "movie"(title, release_date, country)
     VALUES
     ('Hidden Figures', '2016-12-25T00:00:00.000Z', 'USA'),
+    ('The Divergent Series Allegiant', '2016-03-18T00:00:00.000Z', 'USA'),
     ('My Neighbor Totoro', '1988-04-16T00:00:00.000Z', 'Japan'),
-    ('A Year Ago in Winter', '2008-11-13T00:00:00.000Z', 'Germany')
+    ('A Year Ago in Winter', '2008-11-13T00:00:00.000Z', 'Germany');
 
-INSERT INTO "actress"(name, birth_date, gender)
+
+INSERT INTO "actress"(name, birth_date, gender, movies)
     VALUES
-    ('Oktavia Spencer', '1972-05-25T00:00:00.000Z', 'female'),
-    ('Noriko Hidaka', '1962-05-31T00:00:00.000Z', 'female'),
-    ('Karoline Herfurth', '1984-05-22T00:00:00.000Z', 'female')
+    ('Oktavia Spencer', '1972-05-25T00:00:00.000Z', 'female', ARRAY[1,2]),
+    ('Taraji P Henson', '1970-09-11T00:00:00.000Z', 'female', ARRAY[1]),
+    ('Noriko Hidaka', '1962-05-31T00:00:00.000Z', 'female', ARRAY[3]),
+    ('Karoline Herfurth', '1984-05-22T00:00:00.000Z', 'female', ARRAY[4]);

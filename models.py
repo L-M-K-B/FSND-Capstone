@@ -1,5 +1,6 @@
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import Column, String, Integer, DateTime, ARRAY, ForeignKey
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 database_path = "postgres://laura@localhost:5432/capstone"
 
@@ -11,8 +12,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    db.create_all()
-
+    # db.create_all()
 
 # -------------------------------------------- #
 # Models.
@@ -42,14 +42,6 @@ class Movie(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def format(self):
-        return {
-            'id': self.id,
-            'title': self.title,
-            'release_date': self.release_date,
-            'country': self.country,
-        }
-
 
 class Actress(db.Model):
     __tablename__ = 'actress'
@@ -58,11 +50,13 @@ class Actress(db.Model):
     name = Column(String)
     birth_date = Column(DateTime)
     gender = Column(String(120))
+    movies = Column(ARRAY(Integer, ForeignKey('movie.id')))
 
-    def __init__(self, name, birth_date, gender):
+    def __init__(self, name, birth_date, gender, movies):
         self.name = name
         self.birth_date = birth_date
         self.gender = gender
+        self.movies = movies
 
     def insert(self):
         db.session.add(self)
@@ -81,4 +75,5 @@ class Actress(db.Model):
             'name': self.name,
             'birth_date': self.birth_date,
             'gender': self.gender,
+            'movies': self.movies,
         }

@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import SQLAlchemyError
 from flask_cors import CORS
 
 from models import setup_db, Movie, Actress
@@ -23,7 +24,7 @@ def create_dict(query_res):
 # ##--------------------------------------------------## #
 # ##--------------------------------------------------## #
 
-def create_app(test_config=None):
+def create_app():
     app = Flask(__name__)
     setup_db(app)
     app = Flask(__name__)
@@ -36,6 +37,10 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods',
                              'GET, POST, PATCH, DELETE, OPTIONS  ')
         return response
+
+    @app.route('/')
+    def welcome():
+        return 'This is the Capstone start page'
 
     # -- # requests for movie table # -- #
     @app.route('/movies', methods=['GET'])
@@ -50,7 +55,7 @@ def create_app(test_config=None):
         return jsonify({
             'success': True,
             'movies': movies_dict
-        })
+        }), 200
 
     # -- # requests for actresses table # -- #
     @app.route('/actresses', methods=['GET'])
@@ -60,17 +65,17 @@ def create_app(test_config=None):
         if len(actresses) == 0:
             abort(404)
 
-        actresses_dict = create_dict(actresses)
+        actresses_list = [actress.format() for actress in actresses]
 
         return jsonify({
             'success': True,
-            'actresses': actresses_dict
-        })
+            'actresses': actresses_list
+        }), 200
 
     return app
 
 
-APP = create_app()
+app = create_app()
 
 if __name__ == '__main__':
-    APP.run(host='0.0.0.0', port=8080, debug=True)
+    app.run()
