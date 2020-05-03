@@ -1,7 +1,7 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, DateTime
 from flask_sqlalchemy import SQLAlchemy
 
-database_path = "postgres://laura@localhost:5432/trivia"
+database_path = "postgres://laura@localhost:5432/capstone"
 
 db = SQLAlchemy()
 
@@ -21,10 +21,10 @@ def setup_db(app, database_path=database_path):
 class Movie(db.Model):
     __tablename__ = 'movie'
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String)
-    release_date = db.Column(db.DateTime)
-    country = db.Column(db.String(120))
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    release_date = Column(DateTime)
+    country = Column(String(120))
 
     def __init__(self, title, release_date, country):
         self.title = title
@@ -51,13 +51,13 @@ class Movie(db.Model):
         }
 
 
-class Actor(db.Model):
-    __tablename__ = 'actor'
+class Actress(db.Model):
+    __tablename__ = 'actress'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    birth_date = db.Column(db.DateTime)
-    gender = db.Column(db.String(120))
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    birth_date = Column(DateTime)
+    gender = Column(String(120))
 
     def __init__(self, name, birth_date, gender):
         self.name = name
