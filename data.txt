@@ -12,3 +12,7 @@ INSERT INTO "actress"(name, birth_date, gender, movies)
     ('Taraji P Henson', '1970-09-11T00:00:00.000Z', 'female', ARRAY[1]),
     ('Noriko Hidaka', '1962-05-31T00:00:00.000Z', 'female', ARRAY[3]),
     ('Karoline Herfurth', '1984-05-22T00:00:00.000Z', 'female', ARRAY[4]);
+
+INSERT INTO "movie"(title, release_date, country)
+    VALUES
+    ('Perfume The Story of a Murderer', '2066-11-24T00:00:00.000Z', 'Spain');
