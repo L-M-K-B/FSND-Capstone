@@ -87,6 +87,22 @@ def create_app():
         except SQLAlchemyError:
             abort(405)
 
+    # -- # posts a new movie # -- #
+    @app.route('/movie', methods=['POST'])
+    def create_new_movie():
+        movie = request.get_json()
+
+        try:
+            new_movie = Movie(**movie)
+            new_movie.insert()
+
+            return jsonify({
+                'success': True,
+                'created': new_movie.id
+            })
+        except SQLAlchemyError:
+            abort(405)
+
     # -- # deletes an actress # -- #
     @app.route('/actress/<int:actress_id>', methods=['DELETE'])
     def delete_actress(actress_id):
