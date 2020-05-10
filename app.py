@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from flask_cors import CORS
 
-from models import setup_db, Movie, Actress
+from models import setup_db, db_drop_and_create_all, Movie, Actress
 
 
 # ##--------------------------------------------------## #
@@ -28,6 +28,7 @@ def create_app():
     app = Flask(__name__)
     setup_db(app)
     CORS(app)
+    # db_drop_and_create_all()
 
     @app.after_request
     def after_request(response):
