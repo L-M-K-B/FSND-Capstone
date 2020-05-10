@@ -1,9 +1,9 @@
 import os
 from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from flask_cors import CORS
 
+from auth import requires_auth, AuthError
 from models import setup_db, db_drop_and_create_all, Movie, Actress
 
 
@@ -44,7 +44,8 @@ def create_app():
 
     # -- # requests movie table # -- #
     @app.route('/movies', methods=['GET'])
-    def get_movies():
+    @requires_auth('read:movies')
+    def get_movies(payload):
         movies = Movie.query.all()
 
         if len(movies) == 0:
@@ -59,7 +60,8 @@ def create_app():
 
     # -- # requests actresses table # -- #
     @app.route('/actresses', methods=['GET'])
-    def get_actresses():
+    @requires_auth('read:actresses')
+    def get_actresses(payload):
         actresses = Actress.query.all()
 
         if len(actresses) == 0:
@@ -74,7 +76,8 @@ def create_app():
 
     # -- # posts a new actress # -- #
     @app.route('/actress', methods=['POST'])
-    def create_new_actress():
+    @requires_auth('add:actresses')
+    def create_new_actress(payload):
         actress = request.get_json()
 
         try:
@@ -90,7 +93,8 @@ def create_app():
 
     # -- # posts a new movie # -- #
     @app.route('/movie', methods=['POST'])
-    def create_new_movie():
+    @requires_auth('add:movies')
+    def create_new_movie(payload):
         movie = request.get_json()
 
         try:
@@ -106,7 +110,8 @@ def create_app():
 
     # -- # deletes an actress # -- #
     @app.route('/actress/<int:actress_id>', methods=['DELETE'])
-    def delete_actress(actress_id):
+    @requires_auth('delete:actresses')
+    def delete_actress(actress_id, payload):
         try:
             actress = Actress.query.filter(Actress.id == actress_id).one_or_none()
 
@@ -124,7 +129,8 @@ def create_app():
 
     # -- # modifies an actress # -- #
     @app.route('/actress/<int:actress_id>', methods=['PATCH'])
-    def update_actress(actress_id):
+    @requires_auth('modify:actresses')
+    def update_actress(actress_id, payload):
         actress = Actress.query.filter(Actress.id == actress_id).one_or_none()
 
         if not actress:
@@ -206,6 +212,14 @@ def create_app():
             "error": 500,
             "message": "internal server error"
         }), 500
+
+    @app.errorhandler(AuthError)
+    def authentication_error(error):
+        return jsonify({
+            "success": False,
+            "error": error.status_code,
+            "message": "authentication error"
+        }), error.status_code
 
     return app
 
