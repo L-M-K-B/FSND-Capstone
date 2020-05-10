@@ -28,7 +28,7 @@ def create_app():
     app = Flask(__name__)
     setup_db(app)
     CORS(app)
-    # db_drop_and_create_all()
+    db_drop_and_create_all()
 
     @app.after_request
     def after_request(response):
@@ -111,7 +111,7 @@ def create_app():
     # -- # deletes an actress # -- #
     @app.route('/actress/<int:actress_id>', methods=['DELETE'])
     @requires_auth('delete:actresses')
-    def delete_actress(actress_id, payload):
+    def delete_actress(payload, actress_id):
         try:
             actress = Actress.query.filter(Actress.id == actress_id).one_or_none()
 
@@ -130,7 +130,7 @@ def create_app():
     # -- # modifies an actress # -- #
     @app.route('/actress/<int:actress_id>', methods=['PATCH'])
     @requires_auth('modify:actresses')
-    def update_actress(actress_id, payload):
+    def update_actress(payload, actress_id):
         actress = Actress.query.filter(Actress.id == actress_id).one_or_none()
 
         if not actress:
