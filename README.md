@@ -1,4 +1,12 @@
 # FSND-Capstone
+## Table of contents
+**[Introduction](#introduction)**<br>
+**[Installation](#getting-startet)**<br>
+**[Testing](#testing)**<br>
+**[Generating tokens for testing](#generating-tokens-for-testing)**<br>
+**[API endpoints](#api-endpoints)**<br>
+**[Users](#users)**
+
 ## Introduction
 This is the final project of my fullstack developer nano degree. I used the following technologies:
  
@@ -21,7 +29,6 @@ In this folder you can find a `requirements.txt` which you can run with the foll
 ```
 pip3 install -r requirements.txt
 ```
-### Database setup `(????????????????????)`
 ## Testing
 To run the tests, run
 ```
@@ -29,7 +36,16 @@ dropdb capstone-test
 createdb capstone-test
 python test_app.py
 ```
-# API Endpoints
+## Generating tokens for testing
+For using and testing the API bearer tokens are needed for gaining access.<br>
+Please follow the instructions below:
+1. Enter this [URL](https://fsnd-lmkb-capstone.eu.auth0.com/authorize?audience=capstone&response_type=token&client_id=wdw6Dcq4kfsYVkuv34aMN2yCkZJa7SSG&redirect_uri=https://127.0.0.1:8080/login-results) in order to log in
+2. Choose a [user](#users) and log in with the account data provided
+3. The URL now shown will provide the token
+
+**Note:** The token will be valid for 2 hours. 
+
+# API endpoints
 ## GET: /movies
 - fetches a dictionary of movies:
     - keys: ids of movies
@@ -134,3 +150,20 @@ python test_app.py
         ]
 }
 ```
+#Users
+There are two types of users with certain privileges.<br>
+For testing their privileges user account data is provided here to gain suitable tokens.
+## Casting Assistant
+- Can view actors and movies
+
+**Username:** casting-assistant@example.com<br>
+**Password:** tesTteSt321
+
+## Executive Producer
+- Can view actors and movies
+- Add or delete an actor from the database
+- Add or delete a movie from the database
+- Modify actors or movies
+
+**Username:** executive-producer@example.com<br>
+**Password:** TestTestT123
