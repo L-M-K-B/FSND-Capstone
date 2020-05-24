@@ -1,13 +1,13 @@
+import os
 from sqlalchemy import Column, String, Integer, DateTime, ARRAY, ForeignKey
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-
-database_path = "postgres://laura@localhost:5432/capstone"
 
 db = SQLAlchemy()
 
+DATABASE_PATH = os.environ['DATABASE_PATH']
 
-def setup_db(app, database_path=database_path):
+
+def setup_db(app, database_path=DATABASE_PATH):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
