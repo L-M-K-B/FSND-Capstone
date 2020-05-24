@@ -45,8 +45,8 @@ Please follow the instructions below:
 
 **Note:** The token will be valid for 2 hours. 
 
-# API endpoints
-## GET: /movies
+## API endpoints
+### GET: /movies
 - fetches a dictionary of movies:
     - keys: ids of movies
     - values: string, name of movie
@@ -61,7 +61,7 @@ Please follow the instructions below:
         }
 }
 ```
-## GET: /actresses
+### GET: /actresses
 - fetches a list of objects containing all actresses
 - each actress entry is formatted as a dictionary containing the following keys: 
     - birth_date (datetime)
@@ -86,7 +86,7 @@ Please follow the instructions below:
         ]
 }
 ```
-## POST: /actress
+### POST: /actress
 - creates a new actress entry
 - request arguments: 
     - birth_date (DateTime)
@@ -101,7 +101,7 @@ Please follow the instructions below:
     'created': <actress_id (int)>
 }
 ```
-## POST: /movie
+### POST: /movie
 - creates a new movie entry
 - request arguments: 
     - id (int)
@@ -115,7 +115,7 @@ Please follow the instructions below:
     'created': <movie_id (int)>
 }
 ```
-## DELETE: /actress/<actress_id>
+### DELETE: /actress/<actress_id>
 - deletes a single actress
 - request arguments: 
     - id of actress
@@ -126,7 +126,7 @@ Please follow the instructions below:
     'deleted': <actress_id (int)>
 }
 ```
-## PATCH: /actress/<actress_id>
+### PATCH: /actress/<actress_id>
 - modifies an actress entry
 - request arguments (changes are not necessarily applied to all arguments): 
     - birth_date (DateTime)
@@ -150,16 +150,16 @@ Please follow the instructions below:
         ]
 }
 ```
-#Users
+## Users
 There are two types of users with certain privileges.<br>
 For testing their privileges user account data is provided here to gain suitable tokens.
-## Casting Assistant
+### Casting Assistant
 - Can view actors and movies
 
 **Username:** casting-assistant@example.com<br>
 **Password:** tesTteSt321
 
-## Executive Producer
+### Executive Producer
 - Can view actors and movies
 - Add or delete an actor from the database
 - Add or delete a movie from the database
