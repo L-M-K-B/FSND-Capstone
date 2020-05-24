@@ -29,6 +29,21 @@ In this folder you can find a `requirements.txt` which you can run with the foll
 ```
 pip3 install -r requirements.txt
 ```
+### Virtual Enviornment
+It is recommended to work within a virtual environment. Instructions for setting it up can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+## Running the server !!!!!!!!!!!!!!!!!
+First ensure that you are working in the created virtual environment.<br>
+To run the server, execute:
+```bash
+source setup.sh
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask run
+```
+Sourcing `setup.sh` sets some environment variables used by the app.<br>
+Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.<br>
+Setting the `FLASK_APP` variable to `app.py` directs flask to use the this file to find the application.<br>
+You can run this API locally at the default `http://127.0.0.1:5000/`
 ## Testing
 To run the tests, run
 ```
