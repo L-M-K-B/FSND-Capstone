@@ -6,7 +6,7 @@
 **[Testing](#testing)**<br>
 **[Generating tokens](#generating-tokens)**<br>
 **[API endpoints](#api-endpoints)**<br>
-**[Users](#users)**
+**[Users](#users)**<br>
 **[Deployment](#deployment)**
 
 ## Introduction
