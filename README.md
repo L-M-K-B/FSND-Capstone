@@ -2,10 +2,12 @@
 ## Table of contents
 **[Introduction](#introduction)**<br>
 **[Installation](#getting-startet)**<br>
+**[Running the app locally](#running-the-app-locally)**<br>
 **[Testing](#testing)**<br>
-**[Generating tokens for testing](#generating-tokens-for-testing)**<br>
+**[Generating tokens](#generating-tokens)**<br>
 **[API endpoints](#api-endpoints)**<br>
 **[Users](#users)**
+**[Deployment](#deployment)**
 
 ## Introduction
 This is the final project of my fullstack developer nano degree. I used the following technologies:
@@ -24,26 +26,26 @@ This is the final project of my fullstack developer nano degree. I used the foll
 Please install the following dependencies:
 ### Python 3
 Follow the instructions in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+### Virtual environnment
+It is recommended to work within a virtual environment. Instructions for setting it up can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 ### Other dependencies
 In this folder you can find a `requirements.txt` which you can run with the following command:
 ```
 pip3 install -r requirements.txt
 ```
-### Virtual Enviornment
-It is recommended to work within a virtual environment. Instructions for setting it up can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
-## Running the server !!!!!!!!!!!!!!!!!
-First ensure that you are working in the created virtual environment.<br>
-To run the server, execute:
-```bash
+## Running the app locally
+Execute the following to run the server:
+```
 source setup.sh
 export FLASK_APP=app.py
 export FLASK_ENV=development
 flask run
 ```
-Sourcing `setup.sh` sets some environment variables used by the app.<br>
-Setting the `FLASK_ENV` variable to `development` will detect file changes and restart the server automatically.<br>
-Setting the `FLASK_APP` variable to `app.py` directs flask to use the this file to find the application.<br>
-You can run this API locally at the default `http://127.0.0.1:5000/`
+- `setup.sh`: contains environment variables used by the app<br>
+- `FLASK_APP`: directs flask to use this file<br>
+- `FLASK_ENV`: will detect file changes and restart the server automatically.<br>
+
+The API runs on `http://127.0.0.1:5000/`
 ## Testing
 To run the tests, run
 ```
@@ -51,7 +53,7 @@ dropdb capstone-test
 createdb capstone-test
 python test_app.py
 ```
-## Generating tokens for testing
+## Generating tokens
 For using and testing the API bearer tokens are needed for gaining access.<br>
 Please follow the instructions below:
 1. Enter this [URL](https://fsnd-lmkb-capstone.eu.auth0.com/authorize?audience=capstone&response_type=token&client_id=wdw6Dcq4kfsYVkuv34aMN2yCkZJa7SSG&redirect_uri=https://127.0.0.1:8080/login-results) in order to log in
@@ -182,3 +184,7 @@ For testing their privileges user account data is provided here to gain suitable
 
 **Username:** executive-producer@example.com<br>
 **Password:** TestTestT123
+## Deployment
+The app is deployed with Heroku.<br> 
+You can enter it by using the following URL:<br>
+[https://fsnd-lmkb-capstone.herokuapp.com/](https://fsnd-lmkb-capstone.herokuapp.com/)
