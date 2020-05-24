@@ -12,7 +12,13 @@ def setup_db(app, database_path=DATABASE_URL):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    # db.create_all()
+    db.create_all()
+    new_movie = Movie(title="Hidden Figures", release_date="2016-12-25T00:00:00.000Z", country="USA")
+    new_movie.insert()
+
+    new_actress = Actress(name='Taraji P Henson', birth_date='1970-09-11T00:00:00.000Z', gender='female',
+                          movies=[new_movie.id])
+    new_actress.insert()
 
 
 def db_drop_and_create_all():
