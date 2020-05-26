@@ -49,9 +49,10 @@ The API runs on `http://127.0.0.1:5000/`
 ## Testing
 To run the tests, run
 ```
+source setup.sh
 dropdb capstone-test
 createdb capstone-test
-python test_app.py
+python3 test_app.py
 ```
 ## Generating tokens
 For using and testing the API bearer tokens are needed for gaining access.<br>

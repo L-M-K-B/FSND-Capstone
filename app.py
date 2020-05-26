@@ -113,7 +113,8 @@ def create_app():
     @requires_auth('delete:actresses')
     def delete_actress(payload, actress_id):
         try:
-            actress = Actress.query.filter(Actress.id == actress_id).one_or_none()
+            actress = Actress.query.filter(Actress.id == actress_id)\
+                .one_or_none()
 
             if not actress:
                 abort(422)
